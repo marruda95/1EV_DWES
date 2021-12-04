@@ -1,10 +1,12 @@
 package com.sanvalero.AAMaria_Arruda.domain;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -26,7 +28,7 @@ public class Product {
     private int quantityProduct;
     @Column
     private boolean stockProduct;
-    @Column
+    @Column(name = "creation_date")
     private LocalDateTime dateProduct;
 
 
