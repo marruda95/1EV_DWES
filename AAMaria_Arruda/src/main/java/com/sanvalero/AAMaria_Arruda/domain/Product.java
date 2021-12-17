@@ -3,6 +3,7 @@ package com.sanvalero.AAMaria_Arruda.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,21 +15,29 @@ import java.time.LocalDateTime;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idProduct;
+    @NonNull
+    private long id;
     @Column
-    private String nameProduct;
+    @NonNull
+    private String name;
     @Column
-    private String descriptionProduct;
+    @NonNull
+    private String description;
     @Column
-    private String categoryProduct;
+    @NonNull
+    private String category;
     @Column
-    private float priceProduct;
+    @NonNull
+    private float price;
     @Column
-    private int quantityProduct;
+    @NonNull
+    private int quantity;
     @Column
-    private boolean stockProduct;
+    @NonNull
+    private boolean stock;
     @Column
-    private LocalDateTime dateProduct;
+    @NonNull
+    private LocalDateTime date;
 
 
 }
