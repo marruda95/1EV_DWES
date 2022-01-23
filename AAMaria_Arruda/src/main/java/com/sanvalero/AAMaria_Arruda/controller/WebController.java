@@ -3,6 +3,8 @@ package com.sanvalero.AAMaria_Arruda.controller;
 import com.sanvalero.AAMaria_Arruda.domain.Product;
 import com.sanvalero.AAMaria_Arruda.exception.ProductNotFoundException;
 import com.sanvalero.AAMaria_Arruda.service.ProductService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Controller;
@@ -14,15 +16,17 @@ import java.util.List;
 
 @Controller
 public class WebController {
+
+    private final Logger logger = LoggerFactory.getLogger(WebController.class);
+
     @Autowired
-    private ProductService productService;
+    private final ProductService productService;
     public WebController(@NonNull ProductService productService) { this.productService = productService; }
 
 
     @GetMapping(value = "/")
     @PostMapping(value = "/")
     public String index(Model model){
-        System.out.println("Test");
         try{
             List<Product> allProducts = productService.findAllProducts();
             model.addAttribute("products" , allProducts);
@@ -35,7 +39,6 @@ public class WebController {
 
     @GetMapping(value = "/category/{categoryName}")
     public String productsByCategory(Model model, @PathVariable String categoryName){
-        System.out.println("Test");
         try{
             List<Product> categoryProducts = productService.findByCategory(categoryName);
             model.addAttribute("products", categoryProducts);
@@ -48,23 +51,8 @@ public class WebController {
         return "index";
     }
 
-    @GetMapping(value = "/product/{id}")
-    public String product(Model model, @PathVariable long id) throws ProductNotFoundException {
-        System.out.println("Test");
-        try{
-            Product product = productService.findProduct(id);
-            model.addAttribute("product", product);
-        }catch (Exception eox){
-            System.out.println(eox.getLocalizedMessage());
-            model.addAttribute("MESSAGE", eox.getLocalizedMessage());
-        }
-        return "product";
-    }
-
-    @ExceptionHandler(ProductNotFoundException.class)
-    public String handleException(HttpServletRequest request, ProductNotFoundException exception){
-        return "product_error";
-    }
+    @RequestMapping("/checkout")
+    public String checkout(Model model) { return "checkout"; }
 
     @ExceptionHandler
     public String handleException(HttpServletRequest request, Exception exception) {

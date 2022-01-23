@@ -1,8 +1,9 @@
-package com.sanvalero.AAMaria_Arruda.service;
+package com.sanvalero.AAMaria_Arruda.service.impl;
 
 import com.sanvalero.AAMaria_Arruda.domain.Product;
 import com.sanvalero.AAMaria_Arruda.exception.ProductNotFoundException;
 import com.sanvalero.AAMaria_Arruda.repository.ProductRepository;
+import com.sanvalero.AAMaria_Arruda.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
