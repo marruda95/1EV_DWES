@@ -8,13 +8,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+
+import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -29,7 +28,6 @@ public class ProductController {
 
     @RequestMapping(value ="/product/{id}")
     public String product(Model model, @PathVariable long id) throws ProductNotFoundException {
-        System.out.println("Test");
         try{
             Product product = productService.findProduct(id);
             model.addAttribute("product", product);
@@ -39,6 +37,20 @@ public class ProductController {
         }
         return "product";
     }
+
+    @GetMapping("/index")
+    public String productSearch(Model model){
+        model.addAttribute("product", new Product());
+        return "index";
+    }
+
+    @PostMapping("/productSearch={$name}")
+    public String productSearch(Product product, Model model, String name){
+        List<Product> foundProducts = productService.findByName(name);
+        model.addAttribute("foundProduct", foundProducts);
+        return "productSearch";
+    }
+
 
     @ExceptionHandler(ProductNotFoundException.class)
     public String handleException(HttpServletRequest request, ProductNotFoundException exception){

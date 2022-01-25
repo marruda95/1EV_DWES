@@ -28,6 +28,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> findByName(String name) {
+        List<Product> productSearch = (List<Product>) productRepository.findByName(name);
+        return productSearch;
+    }
+
+    @Override
     public List<Product> findByCategory(String category){
         List<Product> products = productRepository.findByCategory(category);
         return products;
@@ -38,5 +44,6 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findById(id)
             .orElseThrow(ProductNotFoundException::new);
     }
+
 
 }

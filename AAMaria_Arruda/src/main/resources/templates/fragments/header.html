@@ -22,7 +22,14 @@
                 </li>
               </ul>
             </div>
-
+            <!-- SEARCH BAR --->
+            <form th:value="${product}">
+                <div>
+                    <label>Busca algo!</label>
+                    <input type="text" name="productSearch" th:value="${productSearch}">
+                    <input type="submit" value="Search">
+                </div>
+            </form>
             <!-- BOTON CERRAR SESIÓN SOLO SI ESTÁ EN SESIÓN // VER PERFIL --->
             <div sec:authorize="isAuthenticated()" class="align-items-right">
                 <a th:href="@{/profile}" title="Ver perfil"><img th:src="@{/images/users/user-profile.png}" height="40px" width="40px"/></a>

@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface ProductService {
     List<Product> findAllProducts();
+    List<Product> findByName(String name);
     List<Product> findByCategory(String category);
     Product findProduct(long id) throws ProductNotFoundException;
 }

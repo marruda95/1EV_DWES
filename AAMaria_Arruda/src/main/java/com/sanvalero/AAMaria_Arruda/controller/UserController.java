@@ -59,6 +59,7 @@ public class UserController {
         return "redirect:/profile";
     }
 
+
     // ENLACE PARA ENTRAR AL PERFIL DEL USUARIO
     @GetMapping("/profile")
     public String profile(Model model, HttpServletRequest request) {
